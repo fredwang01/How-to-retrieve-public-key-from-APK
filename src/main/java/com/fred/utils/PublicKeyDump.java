@@ -62,7 +62,7 @@ public class PublicKeyDump {
 
     private static byte[] getMetaFileData(Context c, String path) {
         ZipInputStream zin = null;
-        ByteArrayOutputStream out = new ByteArrayOutputStream(1024);
+        DirectByteArrayOutputStream out = new DirectByteArrayOutputStream(1024);
         try {
             zin = new ZipInputStream(new BufferedInputStream(new FileInputStream(path)));
             ZipEntry ze;
@@ -85,6 +85,6 @@ public class PublicKeyDump {
                 }
             }
         }
-        return out.toByteArray();
+        return out.getArray();
     }
 }
