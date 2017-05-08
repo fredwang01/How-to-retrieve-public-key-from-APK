@@ -7,6 +7,7 @@ public class DirectByteArrayOutputStream extends ByteArrayOutputStream {
 		super();		
 	}
 	
+	// return the reference of the original byte array instead of allocating a new one.
 	public byte[] getArray() {
 		return buf;
 	}
