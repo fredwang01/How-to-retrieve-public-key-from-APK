@@ -21,12 +21,12 @@ public class PublicKeyDump {
     public static byte[] get(Context c, String path) {
         DirectByteArrayOutputStream data = getMetaFileData(c, path);
         if (data != null) {
-            return get0(data);
+            return getHelper(data);
         }
         return null;
     }
 
-    private static byte[] get0(DirectByteArrayOutputStream data) {
+    private static byte[] getHelper(DirectByteArrayOutputStream data) {
         InputStream in;
         X509Certificate x509;
         try {
