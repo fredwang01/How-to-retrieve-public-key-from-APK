@@ -19,18 +19,18 @@ import sun.security.pkcs.PKCS7;
 public class PublicKeyDump {
 
     public static byte[] get(Context c, String path) {
-        byte[] data = getMetaFileData(c, path);
+        DirectByteArrayOutputStream data = getMetaFileData(c, path);
         if (data != null) {
             return get0(data);
         }
         return null;
     }
 
-    private static byte[] get0(byte[] data) {
+    private static byte[] get0(DirectByteArrayOutputStream data) {
         InputStream in;
         X509Certificate x509;
         try {
-            in = new ByteArrayInputStream(data);
+            in = new ByteArrayInputStream(data.getArray(), 0, data.getCount());
             PKCS7 pkcs7 = new PKCS7(in);
             x509 = pkcs7.getCertificates()[0];
         } catch (Exception e) {
@@ -60,7 +60,7 @@ public class PublicKeyDump {
         }
     }
 
-    private static byte[] getMetaFileData(Context c, String path) {
+    private static DirectByteArrayOutputStream getMetaFileData(Context c, String path) {
         ZipInputStream zin = null;
         DirectByteArrayOutputStream out = new DirectByteArrayOutputStream(1024);
         try {
@@ -85,6 +85,6 @@ public class PublicKeyDump {
                 }
             }
         }
-        return out.getArray();
+        return out;
     }
 }
