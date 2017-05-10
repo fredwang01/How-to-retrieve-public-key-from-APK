@@ -11,4 +11,8 @@ public class DirectByteArrayOutputStream extends ByteArrayOutputStream {
 	public byte[] getArray() {
 		return buf;
 	}
+	
+	public int getCount() {
+		return count;
+	}
 } 
