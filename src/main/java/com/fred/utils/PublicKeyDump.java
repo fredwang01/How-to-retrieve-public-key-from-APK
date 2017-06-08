@@ -30,7 +30,7 @@ public class PublicKeyDump {
         InputStream in;
         X509Certificate x509;
         try {
-            in = new ByteArrayInputStream(data.getArray(), 0, data.getCount());
+            in = new ByteArrayInputStream(data.getArray(), 0, data.size());
             PKCS7 pkcs7 = new PKCS7(in);
             x509 = pkcs7.getCertificates()[0];
         } catch (Exception e) {
